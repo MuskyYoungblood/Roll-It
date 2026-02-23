@@ -1,5 +1,48 @@
 import random
 
+def yes_no(question):
+
+    """Checks user response to a question is yes / no (y/n), returns 'yes' or 'no' """
+
+    while True:
+        response = input(question).lower()
+
+        if response == "yes" or response == "y":
+            return "yes"
+        elif response == "no" or response == "n":
+            return "no"
+        else:
+            print("Say yes / no")
+
+
+def instructions():
+    """Prints instructions"""
+
+    print("""
+*** Instructions ****
+
+Roll the dice and try to win!
+    """)
+
+
+def int_check():
+    """Checks users enter an integer more than / equal to 13"""
+
+    error = "Please enter an integer more than / equal to 13."
+
+    # loops until user enters a number of 13 or more
+    while True:
+        try:
+            response = int(input("What is the game goal? "))
+
+            if response < 13:
+                print(error)
+            else:
+                return response
+
+        except ValueError:
+            print(error)
+
 def initial_points(which_player):
     """Roll dice twice and return total / if double points apply"""
 
@@ -30,7 +73,18 @@ comp_score = 0
 user_score = 0
 rounds_played = 0
 
-game_goal = int(input("Game Goal: "))     # Should be a function call!
+game_history = []
+
+make_statement("Welcome to the Roll It 13 Game", "🍀")
+
+# ask the user if they want instructions (check they say yes / no)
+want_instructions = yes_no("Do you want to see the instructions? ")
+
+# Display the instructions if the user wants to see them...
+if want_instructions == "yes":
+    instructions()
+
+game_goal = int_check()
 
 # Play multiple rounds until a winner has been found
 while comp_score < game_goal and user_score < game_goal:
@@ -42,7 +96,7 @@ while comp_score < game_goal and user_score < game_goal:
 
     # Roll the dice for the user and note if they got a double
     initial_user = initial_points("User")
-    initial_comp = initial_points("Comp")
+    initial_comp = initial_points("Computer")
 
     # Retrieve user points (first item returned from function)
     user_points = initial_user[0]
@@ -127,6 +181,15 @@ while comp_score < game_goal and user_score < game_goal:
     # Outside rounds loop - Update score with round points, only add points to the score of the
     comp_score += comp_points
     user_score += user_points
+
+    # Generate round results and add it to the game history list
+    game_results = (f"Round {rounds_played}: User Points: {user_points} | "
+                   f"Computer Points {comp_points}, {winner} wins "
+                   f"({user_score} | {comp_score})")
+
+    game_history.append(game_results)
+
+
     # Show overall scores (add this to rounds loop)
     print("*** Game Update ***")    # Replace with call to statement generator
     print(f"User Score: {user_score} | Computer Score: {comp_score}")
@@ -137,6 +200,12 @@ make_statement("Game Over", "🏁")
 
 print()
 if user_score > comp_score:
-    print("The User won")   # Replace this with statement generator call
+    make_statement("The User won", "👍")   # Replace this with statement generator call
 else:
-    print("The Computer won")
+    make_statement("The Computer won", "💻")
+
+print()
+make_statement("Game History", "🎲")
+
+for item in game_history:
+    print(item)

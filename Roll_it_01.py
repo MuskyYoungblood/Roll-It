@@ -52,6 +52,5 @@ want_instructions = yes_no("Do you want to see the instructions? ")
 if want_instructions == "yes":
     instructions()
 
-print()
 game_goal = int_check()
 print(game_goal)
