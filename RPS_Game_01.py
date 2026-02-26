@@ -1,3 +1,5 @@
+import random
+
 # Check that users have entered a valid opinion based on a list
 
 def string_checker(question, valid_ans=('yes', 'no')):
@@ -70,6 +72,27 @@ def int_check(question):
         except ValueError:
             print(error)
 
+# Compares user / computer choice and returns result (win / lose / tie)
+def rps_compare(user, comp):
+
+    # If the user and the computer choice is the same, it's a tie
+    if user == comp:
+        result = "tie"
+
+    # There are three ways to win
+    elif user == "paper" and comp == "rock":
+        result = "win"
+    elif user == "scissors" and comp == "paper":
+        result = "win"
+    elif user == "rock" and comp == "scissors":
+        result = "win"
+
+    # If it's a win / tie, then it's a loss
+    else:
+        result = "lose"
+
+    return result
+
 
 # Main Routine Starts Here
 
@@ -106,16 +129,22 @@ while rounds_played < num_rounds:
         rounds_heading = f"\nRound {rounds_played + 1} of {num_rounds}"
 
     print(rounds_heading)
-    print()
 
+    # Randomly choose from the rps list (excluding the exit code)
+    comp_choice = random.choice(rps_list[:-1])
+    print("Computer choice", comp_choice)
+
+    # get user choice
     user_choice = string_checker("Choose: ", rps_list)
-    print("You chose", user_choice)
+    # print("You chose", user_choice)
 
 
     # If user choice is the exit code, break the loop
     if user_choice == "xxx":
         break
 
+    result = rps_compare(user_choice, comp_choice)
+    print(f"{user_choice} vs {comp_choice}, {result}")
 
     rounds_played += 1
 
