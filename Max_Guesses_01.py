@@ -6,7 +6,8 @@ def calc_guesses(low, high):
     num_range = high - low + 1
     max_raw = math.log2(num_range)
     max_upped = math.ceil(max_raw)
-    return max_upped
+    max_guesses = max_upped + 1
+    return max_guesses
 
 # Automated testing is below in the form (test_case, expected_value)
 to_test = [

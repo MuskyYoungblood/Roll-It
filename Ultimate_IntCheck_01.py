@@ -40,16 +40,16 @@ def int_check(question, low=None, high=None, exit_code=None):
 
 # Main Routine
 
-# rounds = "test"
-# while rounds != "":
-#     rounds = int_check("Rounds <enter for infinite>: ", low=1, exit_code="")
-#     print(f"You asked for {rounds}")
+rounds = "test"
+while rounds != "":
+    rounds = int_check("Rounds <enter for infinite>: ", low=1, exit_code="")
+    print(f"You asked for {rounds}")
 
-# low_num = int_check("Low Number? ")
-# print(f"You chose a low number of {low_num}")
+low_num = int_check("Low Number? ")
+print(f"You chose a low number of {low_num}")
 
-# high_num = int_check("High Number? ", low=1)
-# print(f"You chose a high number of {high_num})")
+high_num = int_check("High Number? ", low=1)
+print(f"You chose a high number of {high_num}")
 
 # Check user guesses
 guess = ""

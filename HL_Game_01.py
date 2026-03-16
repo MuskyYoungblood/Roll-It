@@ -37,18 +37,6 @@ Good luck.
 
 # Checks for an integer with optional upper / lower limits and an optional exit code for infinite mode / quitting the game
 def int_check(question, low=None, high=None, exit_code=None):
-
-# Calculate the maximum number of guesses
-def calc_guesses(low, high):
-    num_range = high - low + 1
-    max_raw = math.log2(num_range)
-    max_upped = math.ceil(max_raw)
-    max_guesses = max_upped + 1
-    return max_guesses
-
-# Checks for an integer more than 0 (allow <enter>)
-
-def int_check(question):
     while True:
         error = "Please enter an integer that is 1 or more."
 
@@ -70,6 +58,13 @@ def int_check(question):
         except ValueError:
             print(error)
 
+# Calculate the maximum number of guesses
+def calc_guesses(low, high):
+    num_range = high - low + 1
+    max_raw = math.log2(num_range)
+    max_upped = math.ceil(max_raw)
+    max_guesses = max_upped + 1
+    return max_guesses
 
 # Main Routine Starts Here
 
@@ -98,10 +93,11 @@ if num_rounds == "infinite":
 low_num = int_check("Low Number? ")
 high_num = int_check("High Number? ", low=low_num + 1)
 guesses_allowed = calc_guesses(low_num, high_num)
+
 # Game loop starts here
 while rounds_played < num_rounds:
 
-    # Rounds headings
+    # Rounds headings (based on mode)
     if mode == "infinite":
         rounds_heading = f"\nRound {rounds_played + 1} (Infinite Mode)"
     else:
