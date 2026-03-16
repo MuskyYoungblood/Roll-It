@@ -1,6 +1,6 @@
 # Check that users have entered a valid opinion based on a list
 
-def string_checker(question, valid_ans=['yes', 'no']):
+def string_checker(question, valid_ans=('yes', 'no')):
 
     error = f"Please enter a valid option from the following list: {valid_ans}"
 
@@ -25,7 +25,7 @@ def string_checker(question, valid_ans=['yes', 'no']):
 
 # Main routine
 
-rps_list = ["Rock", "Paper", "Scissors", "xxx"]
+rps_list = ["rock", "paper", "scissors", "xxx"]
 
 want_instructions = string_checker("Do you want to see the instructions? ")
 
